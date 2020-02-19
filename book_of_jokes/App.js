@@ -11,6 +11,7 @@ import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
 
 import OptionFor2DayScreen from './screens/optionFor2Day';
+import JokePreparationScreen from './screens/jokePreparationScreen';
 
 const Stack = createStackNavigator();
 
@@ -57,7 +58,12 @@ export default function App(props) {
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <NavigationContainer ref={containerRef} >
           <Stack.Navigator>
-            <Stack.Screen name="Options" component={OptionFor2DayScreen} />
+            <Stack.Screen
+              name="Options" component={OptionFor2DayScreen}
+              options={{ title: 'options for today' }} />
+            <Stack.Screen
+              name="JokePreparation" component={JokePreparationScreen}
+              options={{ title: 'joke is coming...', headerBackTitleVisible: false, }} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
