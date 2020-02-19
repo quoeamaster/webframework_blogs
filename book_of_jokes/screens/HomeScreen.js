@@ -5,6 +5,8 @@ import * as WebBrowser from 'expo-web-browser';
 
 import { MonoText } from '../components/StyledText';
 
+import commonStyle from './../assets/styles/common';
+
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
@@ -29,8 +31,8 @@ export default function HomeScreen() {
             <MonoText>screens/HomeScreen.js</MonoText>
           </View>
 
-          <Text style={styles.getStartedText}>
-            Change any of the text, save the file, and your app will automatically reload.
+          <Text style={[styles.getStartedText, commonStyle.coreContainer]}>
+            Hey I feel cool
           </Text>
         </View>
 
