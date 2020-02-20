@@ -1,8 +1,10 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity, Vibration } from 'react-native';
 
 import commonStyle from './../assets/styles/common';
+
+import MultiTouchWrapper from './../components/MultiTouchWrapper';
 
 export default function JokePreparationScreen({route, navigation}) {
   /*
@@ -11,8 +13,47 @@ export default function JokePreparationScreen({route, navigation}) {
   let {name} = route.params;
   console.log(name);
   */
-  // TODO: set the background to a full image and place some words... at the top or middle
+  // set the background to a full image and place some words...
+  // at the top or middle; use either a position absolute or alignItems feature to restructure your components on top of the ImageBackground
+  //
   // TODO: add LongPress gesture handling too (shake)
+  // TODO: add a new common multi-tap component =>
+  //  https://egghead.io/lessons/react-native-detect-multiple-touches-in-react-native-with-the-gesture-responder-system
+
+  const [isJokeRetrieved, setJokeRetrieved] = React.useState(false);
+  const [joke, setJoke] = React.useState(null);
+
+  let _onThumbsLongPress = function (evt) {
+    // check number of touches (not really necessary though....)
+    if (evt && evt.touchHistory && evt.touchHistory.numberActiveTouches &&
+      evt.touchHistory.numberActiveTouches === 2) {
+      // get the joke first
+      let promiseFJ = _fetchJoke();
+      console.log(promiseFJ);
+      console.log(joke);
+      // shake the phone....
+      const PATTERN = [500, 1000, 1500];
+      Vibration.vibrate(PATTERN)
+    }
+  };
+  let _onThumbsPressOut = function (evt) {
+    console.log('released');
+  };
+
+  let _fetchJoke = async function () {
+    const JOKE_API = "https://icanhazdadjoke.com/";
+    try {
+      let response = await fetch(JOKE_API);
+      let responseJson = await response.json();
+
+      console.log(responseJson);
+      return responseJson;
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+
   return (
     <View style={[commonStyle.coreContainer, styles.container]}>
       <ImageBackground
@@ -24,18 +65,19 @@ export default function JokePreparationScreen({route, navigation}) {
             Place your thumbs here
           </Text>
         </View>
-        <View style={styles.printContainer}>
-          <TouchableOpacity>
-            <Image
-              style={styles.printImg}
-              source={require('./../assets/images/reactNative-prints_left.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              style={styles.printImg}
-              source={require('./../assets/images/reactNative-prints.png')} />
-          </TouchableOpacity>
-        </View>
+
+        <TouchableOpacity
+          onLongPress={_onThumbsLongPress}
+          onPressOut={_onThumbsPressOut}
+          style={styles.printContainer}>
+          <Image
+            style={styles.printImg}
+            source={require('./../assets/images/reactNative-prints_left.png')} />
+          <Image
+            style={styles.printImg}
+            source={require('./../assets/images/reactNative-prints.png')} />
+        </TouchableOpacity>
+
       </ImageBackground>
 
     </View>
@@ -70,3 +112,22 @@ const styles = StyleSheet.create({
     height: 120,
   },
 });
+
+/*
+using a wrapper to detect multi-gesture / taps
+
+          <MultiTouchWrapper
+            numberOfTouchesExpected="2"
+            callback={() => alert('yo')}
+            containerStyle={styles.printContainer}
+            children={this} >
+            <TouchableOpacity style={styles.printContainer}>
+              <Image
+                style={styles.printImg}
+                source={require('./../assets/images/reactNative-prints_left.png')} />
+              <Image
+                style={styles.printImg}
+                source={require('./../assets/images/reactNative-prints.png')} />
+            </TouchableOpacity>
+          </MultiTouchWrapper>
+ */
