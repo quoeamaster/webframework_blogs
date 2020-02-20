@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity, Vibra
 
 import commonStyle from './../assets/styles/common';
 
-import MultiTouchWrapper from './../components/MultiTouchWrapper';
+// import MultiTouchWrapper from './../components/MultiTouchWrapper';
 
 export default function JokePreparationScreen({route, navigation}) {
   /*
@@ -16,13 +16,16 @@ export default function JokePreparationScreen({route, navigation}) {
   // set the background to a full image and place some words...
   // at the top or middle; use either a position absolute or alignItems feature to restructure your components on top of the ImageBackground
   //
-  // TODO: add LongPress gesture handling too (shake)
-  // TODO: add a new common multi-tap component =>
+  // add LongPress gesture handling too (shake)
+  // add a new common multi-tap component => Not really necessary somehow....
   //  https://egghead.io/lessons/react-native-detect-multiple-touches-in-react-native-with-the-gesture-responder-system
+
+  // TODO: add lotte AE animation
 
   const DEFAULT_CAPTION = `Concentrate and the joke would come out soon...
   
 Place your thumbs here`;
+
   const [isJokeRetrieved, setJokeRetrieved] = React.useState(false);
   const [joke, setJoke] = React.useState(null);
   const [captionMsg, setCaptionMsg] = React.useState(DEFAULT_CAPTION);
@@ -45,9 +48,9 @@ Place your thumbs here`;
     if (isJokeRetrieved === true) {
       if (joke.hasOwnProperty("joke")) {
         setCaptionMsg(joke.joke);
+        // TODO: need to keep the joke_id???? or create an offline jokes repository????
       }
     }
-    console.log('released', joke);
   };
 
   let _fetchJoke = async function () {
