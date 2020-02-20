@@ -20,34 +20,53 @@ export default function JokePreparationScreen({route, navigation}) {
   // TODO: add a new common multi-tap component =>
   //  https://egghead.io/lessons/react-native-detect-multiple-touches-in-react-native-with-the-gesture-responder-system
 
+  const DEFAULT_CAPTION = `Concentrate and the joke would come out soon...
+  
+Place your thumbs here`;
   const [isJokeRetrieved, setJokeRetrieved] = React.useState(false);
   const [joke, setJoke] = React.useState(null);
+  const [captionMsg, setCaptionMsg] = React.useState(DEFAULT_CAPTION);
+  //const captionTextRef = React.useRef();
 
   let _onThumbsLongPress = function (evt) {
     // check number of touches (not really necessary though....)
     if (evt && evt.touchHistory && evt.touchHistory.numberActiveTouches &&
       evt.touchHistory.numberActiveTouches === 2) {
       // get the joke first
-      let promiseFJ = _fetchJoke();
-      console.log(promiseFJ);
-      console.log(joke);
+      _fetchJoke();
+
       // shake the phone....
-      const PATTERN = [500, 1000, 1500];
-      Vibration.vibrate(PATTERN)
+      const PATTERN = [500, 1000];
+      Vibration.vibrate(PATTERN);
     }
   };
   let _onThumbsPressOut = function (evt) {
-    console.log('released');
+    // TODO: if isJokeRetrieved === true... display it etc
+    if (isJokeRetrieved === true) {
+      if (joke.hasOwnProperty("joke")) {
+        setCaptionMsg(joke.joke);
+      }
+    }
+    console.log('released', joke);
   };
 
   let _fetchJoke = async function () {
     const JOKE_API = "https://icanhazdadjoke.com/";
+    setJoke(null);
     try {
-      let response = await fetch(JOKE_API);
-      let responseJson = await response.json();
+      let response = await fetch(JOKE_API, {
+        method: "GET",
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
+      let jsonResponse = await response.json();
+      setJoke(jsonResponse);
+      setJokeRetrieved(true);
 
-      console.log(responseJson);
-      return responseJson;
+      return jsonResponse;
+
     } catch (e) {
       console.error(e);
     }
@@ -61,8 +80,7 @@ export default function JokePreparationScreen({route, navigation}) {
         source={require('./../assets/images/reactNativeSmiley.jpg')}>
         <View style={styles.captionContainer}>
           <Text style={styles.captionText}>
-            Concentrate and the joke would come out soon...{"\n\n"}
-            Place your thumbs here
+            {captionMsg}
           </Text>
         </View>
 
