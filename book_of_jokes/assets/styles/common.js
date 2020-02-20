@@ -5,6 +5,11 @@ const commonStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  fullBackgroundImage: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+  },
 });
 
 export default commonStyles;

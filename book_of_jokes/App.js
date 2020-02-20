@@ -63,7 +63,7 @@ export default function App(props) {
               options={{ title: 'options for today' }} />
             <Stack.Screen
               name="JokePreparation" component={JokePreparationScreen}
-              options={{ title: 'joke is coming...', headerBackTitleVisible: false, }} />
+              options={{ headerShown: false, headerBackTitleVisible: false, }} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
