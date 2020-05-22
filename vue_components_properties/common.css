@@ -1,0 +1,137 @@
+
+.ob-img-container {
+    margin: auto;
+    width: 600px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    /*
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 400px;
+    */
+}
+
+.ob-img-q-text {
+    text-align: center;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.ob-img-opts-container {
+    position: absolute;
+    bottom: 0;
+    height: 80px;
+    color: whitesmoke;
+    width: 100%;
+}
+
+.ob-img-opts-inner-container {
+    display: flex;
+    flex-direction: row;
+}
+.ob-img-opts-btn {
+    flex-grow: 1;
+    text-align: center;
+    line-height: 80px;
+    height: 80px;
+    vertical-align: middle;
+    border: 1px solid #aaa;
+}
+.ob-img-opts-text-black {
+    color: black;
+}
+.ob-img-opts-text-white {
+    color: white;
+}
+.ob-img-text {
+    font-size: 1.2em;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+
+
+.dl-item-container {
+    border-bottom: 1px solid #ddd;
+    padding: 4px 0 8px 0;
+}
+.dl-q {
+    flex-grow: 0; 
+    width: 100%;
+    padding: 0 4px 0 12px;
+    font-size: 0.9em;
+    font-weight: 600;
+    min-height: 35px;
+}
+.dl-a {
+    width: 100%;
+    padding: 0 4px 0 12px;
+    font-size: 1.1em;
+    font-weight: 400;
+}
+.dl-outer-container {
+    overflow: scroll;
+    height: 720px; /* 760 best match */
+    border: 1px solid rgba(204,204,204,0.4);
+    border-radius: 6px;
+    padding: 0 2px 0 2px;
+}
+
+
+
+.dlg-backdrop {
+    position: fixed;
+    background-color: rgba(0,0,0,0.6);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 40;
+}
+.dlg-container {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: whitesmoke;
+    color: black;
+    z-index: 50;
+    border-radius: 12px;
+
+    width: 500px;
+    min-height: 400px;
+    max-height: 700px;
+}
+.dlg-header-bar {
+    padding: 6px 16px 6px 12px; 
+    height: 36px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+.dlg-q {
+    font-size: 1.2em; 
+    font-weight: 600;
+    padding: 12px 0 20px 16px;
+}
+.dlg-a {
+    padding: 4px 20px 0px 20px;
+}
+.dlg-btn {
+    font-size: 1.1em;
+    color: black;
+    line-height: 80px;
+    height: 80px;
+    width: 50%;
+    vertical-align: middle;
+    text-align: center;
+    flex-grow: 0;
+    cursor: pointer;
+}
+.dlg-btn-confirm {
+    border-bottom-left-radius: 12px;
+}
+.dlg-btn-cancel {
+    border-bottom-right-radius: 12px;
+}

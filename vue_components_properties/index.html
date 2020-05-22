@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        
+        <!-- css -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        <link rel="stylesheet" href="common.css">
+        
+    </head>
+    <body>
+        <div id='app'>
+            <h1 style="text-align: center;">welcome to the world of choices</h1>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-8 col-md-8 col-sm-12 col-xs-12">
+                        <option-bar 
+                            @on-q-answered='onAnsweredNProceed'
+                            :opt='optsList[optsIdx]'></option-bar>
+                    </div>
+                    <div class="col-4 col-md-4 col-sm-12 col-xs-12">
+                        <h4 style='text-align: center;'>answered list</h4>
+                        
+                        <div class="dl-outer-container">
+                            <done-list 
+                                @on-done-list-item-click='onDoneListItemClick'
+                                v-for='(item, idx) in doneList'
+                                :idx='idx'
+                                :item='item'></done-list>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- dialog -->
+            <modify-dlg 
+                @on-dlg-cancel='onDlgCancel'
+                :item='dlgItem'
+                :show="showDlg"></modify-dlg>
+        </div>
+        <script src="components/modifyDlg.js"></script>
+        <script src="components/doneList.js"></script>
+        <script src="components/optionbar.js"></script>
+        <script src="components/app.js"></script>
+    </body>
+</html>

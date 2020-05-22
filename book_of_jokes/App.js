@@ -59,11 +59,11 @@ export default function App(props) {
         <NavigationContainer ref={containerRef} >
           <Stack.Navigator>
             <Stack.Screen
-              name="Options" component={OptionFor2DayScreen}
-              options={{ title: 'options for today' }} />
-            <Stack.Screen
               name="JokePreparation" component={JokePreparationScreen}
               options={{ headerShown: false, headerBackTitleVisible: false, }} />
+            <Stack.Screen
+              name="Options" component={OptionFor2DayScreen}
+              options={{ title: 'options for today' }} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
