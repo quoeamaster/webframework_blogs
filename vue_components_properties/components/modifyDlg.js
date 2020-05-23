@@ -7,15 +7,33 @@ let ModifyDlg = Vue.component('modify-dlg', {
         };
     },
     methods: {
+        _cleanup: function() {
+            //this.optChosen = 0;
+        },
+
         onCancel: function() {
             // reset values
-            this.optChosen = 0;
+            this._cleanup();
             this.$emit('on-dlg-cancel', {});
         },
         onConfirm: function() {
-// TODO: update the app's doneList contents (check if the reference hell problem occurs here :P)
+            // update the app's doneList contents (check if the reference hell problem occurs here :P)
+            /*let _d = Object.assign({}, this.item);
+            if (_d.answer != this.optChosen) {
+                _d['new_answer'] = this.optChosen;
+            }*/
+            let _d = {
+                img: this.item.img, 
+                q: this.item.q,
+                answer: this.item.answer,
+                'new_answer': this.optChosen
+            };
+
+            this._cleanup();
+            this.$emit('on-dlg-confirm', _d);
         }
-        /* normal cases should not need to use this methood v-model should do the trick for us
+        /* normal cases should not need to use this methood v-model should do the trick for us */
+        /*
         shouldCheck: function(idx) {
             //console.log(idx, this.item.answer, (idx == this.item.answer));
             let _c = false;

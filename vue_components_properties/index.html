@@ -5,6 +5,7 @@
         <!-- css -->
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        <link rel='stylesheet' href='res/font-awesome-4.7.0/css/font-awesome.css' crossorigin="anonymous">
         <link rel="stylesheet" href="common.css">
         
     </head>
@@ -23,6 +24,7 @@
                         
                         <div class="dl-outer-container">
                             <done-list 
+                                @on-done-list-item-del='onDoneListItemDel'
                                 @on-done-list-item-click='onDoneListItemClick'
                                 v-for='(item, idx) in doneList'
                                 :idx='idx'
@@ -35,6 +37,7 @@
             <!-- dialog -->
             <modify-dlg 
                 @on-dlg-cancel='onDlgCancel'
+                @on-dlg-confirm='onDlgConfirm'
                 :item='dlgItem'
                 :show="showDlg"></modify-dlg>
         </div>

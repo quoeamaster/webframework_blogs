@@ -19,13 +19,25 @@ let DoneList = Vue.component('done-list', {
     methods: {
         onItemClick: function() {
             this.$emit('on-done-list-item-click', this.item);
+        },
+        onDeleteDoneItem: function() {
+            let _d = Object.assign({}, this.item);
+            _d['idx'] = this.idx;
+            this.$emit('on-done-list-item-del', _d);
         }
     },
     template: `
 <div class='dl-item-container' @click='onItemClick'>
     <div style='display: flex; flex-direction: row; overflow: hidden;'>
         <!-- thumbnail -->
-        <div :style='bImg'></div>
+        <div :style='bImg'>
+            <div class="fa-stack pull-right" 
+                @click.stop.prevent='onDeleteDoneItem'
+                style='cursor: pointer;'>
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-trash fa-stack-1x fa-inverse"></i>
+            </div>
+        </div>
         <div style='display: flex; flex-direction: column;'>
             <!-- question -->
             <div class='dl-q'>

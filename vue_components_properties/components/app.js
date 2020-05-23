@@ -47,8 +47,26 @@ var app = new Vue({
             this.dlgItem = null; // bug (need to reset object reference before hand)
             this.dlgItem = data;
         },
+        onDoneListItemDel: function(data) {
+            if (data && data.idx != undefined) {
+                this.doneList.splice(data.idx, 1);
+            }
+        },
         onDlgCancel: function() {
             this.showDlg = false;
+        },
+        onDlgConfirm: function(data) {
+            this.showDlg = false;
+            if (data && data.hasOwnProperty("new_answer")) {
+                // find out which doneList item it is (by idx)
+                let _l = this.doneList.length;
+                for (let _i=0; _i<_l; _i++) {
+                    let _item = this.doneList[_i];
+                    if (_item.q == data.q && _item.answer == data.answer && _item.img == data.img) {
+                        _item.answer = data['new_answer'];
+                    } // match
+                } // end -- for
+            }
         }
     }
 });
