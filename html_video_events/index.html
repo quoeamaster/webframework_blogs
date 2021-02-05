@@ -1,0 +1,24 @@
+<html>
+   <head>
+   </head>
+   <body>
+      <h2>demo on video playback event handling</h2>
+      <video id="video1" width="420" muted>
+         <!-- controls -->
+         <source src="vid/sample.ogv" type="video/ogg">
+         <!-- if source is mp4 -->
+         <!-- source src="path/filename.mp4" type="video/mp4" -->
+         Your browser does not support HTML5 video.
+       </video>
+
+       <!-- script -->
+       <script>
+         function onVideoEnd() {
+            window.location.href = "lucky_charms.html"
+         }
+         // embed a "ended" event handler
+         document.getElementById('video1').addEventListener('ended',onVideoEnd,false);
+         document.getElementById('video1').play();
+      </script>
+   </body>
+</html>

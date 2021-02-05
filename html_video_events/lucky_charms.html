@@ -1,0 +1,31 @@
+<html>
+   <body>
+      Welcome to the lucky charm page~
+      <p>
+         click to get a charm 
+         <input type="button" value=":)" onclick="getLuckyCharm()"></input>
+      </p>
+      <div id="divCharm"></div>
+
+      <script>
+         var charms = [
+            "be a nice person and enjoy a nice day",
+            "good friends never cheats~",
+            "life is like a cake, make it sweet and adorable"
+         ]
+
+         function getLuckyCharm() {
+            var randomIdx = Math.floor(Math.random() * charms.length);
+            var charmContent = document.createElement("span");
+            charmContent.innerHTML = charms[randomIdx];
+
+            var targetNode = document.querySelector("#divCharm");
+            while (targetNode.firstChild) {
+               targetNode.firstChild.remove()
+            }
+            targetNode.appendChild(charmContent);
+
+         }
+      </script>
+   </body>
+</html>
